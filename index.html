@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Rock, Paper, Scissors</title>
+        <meta charset='utf-8'>
+    </head>
+    <body>
+        <script>
+            const options = ['Rock', 'Paper', 'Scissors'];
+
+            function computerPlay() {
+                const optionNumber = (Math.floor(Math.random() * 3));
+
+                return options[optionNumber];
+            }
+
+            const computerChoice = computerPlay();
+
+            const playerChoice = prompt('Rock, paper or scissors?');
+
+            function playRound(computerChoice, playerChoice) {
+                if (computerChoice.toLowerCase() === playerChoice.toLowerCase()) {
+                    return "It's a tie!";
+                } else if (computerChoice.toLowerCase() === 'rock' && playerChoice.toLowerCase() === 'paper') {
+                    return "You win! Paper covers rock.";
+                } else if (computerChoice.toLowerCase() === 'rock' && playerChoice.toLowerCase() === 'scissors') {
+                    return "You lose! Rock beats scissors.";
+                } else if (computerChoice.toLowerCase() === 'paper' && playerChoice.toLowerCase() === 'rock') {
+                    return "You lose! Paper covers rock.";
+                } else if (computerChoice.toLowerCase() === 'paper' && playerChoice.toLowerCase() === 'scissors') {
+                    return "You win! Scissors cuts paper.";
+                } else if (computerChoice.toLowerCase() === 'scissors' && playerChoice.toLowerCase() === 'rock') {
+                    return "You win! Rock beats scissors.";
+                } else if (computerChoice.toLowerCase() === 'scissors' && playerChoice.toLowerCase() === 'paper') {
+                    return "You lose! Scissors cuts paper.";
+                }
+            }
+
+            playRound(computerChoice, playerChoice);
+        </script>
+    </body>
+</html>
