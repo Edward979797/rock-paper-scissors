@@ -3,9 +3,106 @@
     <head>
         <title>Rock, Paper, Scissors</title>
         <meta charset='utf-8'>
+        <link rel="stylesheet" href="./style.css">
     </head>
     <body>
+        <div class="title">
+            Rock, Paper, Scissors
+        </div>
+        <div class="scoreboard">
+            <div class="score-headers">
+                <div class="score-header-left">
+                    You
+                </div>
+                <div class="score-header-right">
+                    CPU
+                </div>
+            </div>
+            <div class="score-numbers">
+                <div class="score-number-left">
+                    0
+                </div>
+                <div class="score-number-right">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="rock-btn">Rock</button>
+            <button class="paper-btn">Paper</button>
+            <button class="scissors-btn">Scissors</button>
+        </div>
+
         <script>
+
+            let playerScore = 0;
+
+            let computerScore = 0;
+
+            const rock = document.querySelector('.rock-btn');
+            const paper = document.querySelector('.paper-btn');
+            const scissors = document.querySelector('.scissors-btn');
+            const scoreLeft = document.querySelector('.score-number-left');
+            const scoreRight = document.querySelector('.score-number-right');
+            const body = document.querySelector('body');
+
+            const announcement = document.createElement('div');
+            announcement.style.color = 'white';
+            announcement.style.backgroundColor = 'black';
+            announcement.style.fontSize = '20px';
+            announcement.style.marginTop = '5vh';
+
+            rock.addEventListener('click', () => {
+                playerChoice = 'Rock';
+                playRound();
+            });
+
+            rock.addEventListener('mouseover', (e) => {
+                e.target.style.width = '320px';
+                e.target.style.height = '220px';
+                e.target.style.backgroundColor = 'orange';
+            });
+
+            rock.addEventListener('mouseout', (e) => {
+                e.target.style.width = '300px';
+                e.target.style.height = '200px';
+                e.target.style.backgroundColor = 'red';
+            })
+
+            paper.addEventListener('click', () => {
+                playerChoice = 'Paper';
+                playRound();
+            });
+
+            paper.addEventListener('mouseover', (e) => {
+                e.target.style.width = '320px';
+                e.target.style.height = '220px';
+                e.target.style.backgroundColor = 'skyblue';
+            });
+
+            paper.addEventListener('mouseout', (e) => {
+                e.target.style.width = '300px';
+                e.target.style.height = '200px';
+                e.target.style.backgroundColor = 'blue';
+            })
+
+            scissors.addEventListener('click', () => {
+                playerChoice = 'Scissors';
+                playRound();
+            });
+
+            scissors.addEventListener('mouseover', (e) => {
+                e.target.style.width = '320px';
+                e.target.style.height = '220px';
+                e.target.style.backgroundColor = 'limegreen';
+            });
+
+            scissors.addEventListener('mouseout', (e) => {
+                e.target.style.width = '300px';
+                e.target.style.height = '200px';
+                e.target.style.backgroundColor = 'green';
+            })
+
             const options = ['Rock', 'Paper', 'Scissors'];
 
             function computerPlay() {
@@ -14,53 +111,55 @@
                 return options[optionNumber];
             }
 
-            let playerScore = 0;
-
-            let computerScore = 0;
-
             function playRound() {
                 const computerChoice = computerPlay();
-                const playerChoice = prompt('Rock, paper or scissors?');
-
+                
                 if (computerChoice.toLowerCase() === playerChoice.toLowerCase()) {
-                    return "It's a tie!";
+                    announcement.innerText = "It's a tie!";
                 } else if (computerChoice.toLowerCase() === 'rock' && playerChoice.toLowerCase() === 'paper') {
                     playerScore++;
-                    return "You win! Paper covers rock.";
+                    announcement.innerText = "You win! Paper covers rock.";
                 } else if (computerChoice.toLowerCase() === 'rock' && playerChoice.toLowerCase() === 'scissors') {
                     computerScore++;
-                    return "You lose! Rock beats scissors.";
+                    announcement.innerText = "You lose! Rock beats scissors.";
                 } else if (computerChoice.toLowerCase() === 'paper' && playerChoice.toLowerCase() === 'rock') {
                     computerScore++;
-                    return "You lose! Paper covers rock.";
+                    announcement.innerText = "You lose! Paper covers rock.";
                 } else if (computerChoice.toLowerCase() === 'paper' && playerChoice.toLowerCase() === 'scissors') {
                     playerScore++;
-                    return "You win! Scissors cuts paper.";
+                    announcement.innerText = "You win! Scissors cuts paper.";
                 } else if (computerChoice.toLowerCase() === 'scissors' && playerChoice.toLowerCase() === 'rock') {
                     playerScore++;
-                    return "You win! Rock beats scissors.";
+                    announcement.innerText = "You win! Rock beats scissors.";
                 } else if (computerChoice.toLowerCase() === 'scissors' && playerChoice.toLowerCase() === 'paper') {
                     computerScore++;
-                    return "You lose! Scissors cuts paper.";
-                }
-            }
-
-            function game() {
-                for (let i = 0; i < 5; i++) {
-                    playRound();
-                    console.log(`Current score is: Player ${playerScore}-${computerScore} Computer`);
+                    announcement.innerText = "You lose! Scissors cuts paper.";
                 }
 
-                if (playerScore === computerScore) {
-                    console.log("It's a tie game!");
-                } else if (playerScore > computerScore) {
-                    console.log("Congratulations! You win.")
+                playerChoice = '';
+                
+
+                if (playerScore >= 5) {
+                    scoreLeft.innerText = playerScore;
+                    scoreRight.innerText = computerScore;
+                    body.appendChild(announcement);
+                    alert("Congratulations! You win.");
+                    playerScore = 0;
+                    computerScore = 0;    
+                } else if (computerScore >= 5) {
+                    scoreLeft.innerText = playerScore;
+                    scoreRight.innerText = computerScore;
+                    body.appendChild(announcement);
+                    alert("Sorry, you lost. Try again.");
+                    playerScore = 0;
+                    computerScore = 0;
                 } else {
-                    console.log("Sorry! You lost.")
+                    scoreLeft.innerText = playerScore;
+                    scoreRight.innerText = computerScore;
+                    body.appendChild(announcement);
                 }
             }
-
-            game();
         </script>
+
     </body>
 </html>
